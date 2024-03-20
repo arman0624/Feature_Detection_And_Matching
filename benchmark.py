@@ -262,4 +262,3 @@ def benchmark(origImage, trafoImages, homographies,
         ylabel = 'True rate', line_names=line_legends)
 
     return ds, aucs, roc_img
-

@@ -75,12 +75,11 @@ image = np.array(Image.open('resources/triangle1.jpg'))
 grayImage = cv2.cvtColor(image.astype(np.float32)/255.0, cv2.COLOR_BGR2GRAY)
 
 def compute_and_save():
-    (a,b) = HKD.computeHarrisValues(grayImage) # Todo1
-    c = HKD.computeLocalMaxima(a) # Todo2
-    d = HKD.detectKeypoints(image) # Todo3
-    e = SFD.describeFeatures(image, d) # Todo 4
-    f = MFD.describeFeatures(image, d) # Todo 5,6
-    # No test for Todo 7 or 8
+    (a,b) = HKD.computeHarrisValues(grayImage)
+    c = HKD.computeLocalMaxima(a)
+    d = HKD.detectKeypoints(image)
+    e = SFD.describeFeatures(image, d)
+    f = MFD.describeFeatures(image, d)
     d_proc = pickle_cv2(d)
     np.savez('resources/arrays',a=a,b=b,c=c,d_proc=d_proc,e=e,f=f)
 # Uncomment next line to overwrite test data (not recommended)
@@ -89,19 +88,6 @@ def compute_and_save():
 
 '''
 Load in the numpy arrays which hold results for triangle1.jpg.
-
-These arrays can be accessed using loaded['<letter>']. For example, the
-correct output for test 2 is 'c', so to see the correct output for test
-2 you can inspect loaded['c'].  Important note: NumPy does not print
-the entire array if it is very large --- you must print smaller pieces
-(e.g., print repr(loaded['c'][0])).
-
-If your tests fail you should inspect why it failed. In particular,
-pay attention to the tolerances used by this testing script. It is
-possible that your answer is correct but it barely falls outside the
-tolerance range.
-
-This is not the script used by the autograder. 
 '''
 loaded = np.load('resources/arrays.npz', allow_pickle=True)
 d = unpickle_cv2(loaded['d_proc'])
